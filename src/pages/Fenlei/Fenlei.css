@@ -1,0 +1,75 @@
+.fenlei {
+    width: 100%;
+    height: 100%;
+}
+
+h3 {
+    position: fixed !important;
+    width: 100%;
+    top: 0;
+    left: 0;
+    font: 0.36rem/0.72rem '微软雅黑';
+    color: #ffffff;
+    background: #ff9900;
+    text-align: center;
+    z-index: 11;
+}
+
+.fenlei .main {
+    margin-top: .72rem;
+    display: flex;
+    width: 100%;
+}
+
+.fenlei .main .nav {
+    display: block;
+    width: 2.08rem;
+}
+
+.fenlei .main .nav span {
+    display: block;
+    width: 2.08rem;
+    font: 0.22rem/0.82rem '微软雅黑';
+    text-align: center;
+}
+.fenlei .main .nav .select{
+    background: #fafafa;
+    color: #ff9900;
+    border-left: 0.08rem solid #1d84a7;
+    box-sizing: border-box;
+    
+}
+
+.fenlei .main .lists {
+    flex-wrap: wrap;
+    display: flex;
+    margin-left: 0.16rem;
+}
+
+.fenlei .main .lists li {
+    width: 2.2rem;
+    height: 2.2rem;
+    margin: 0 .22rem 0.12rem 0;
+    margin-bottom: 0.22rem;
+    position: relative;
+}
+
+.fenlei .main .lists img {
+    width: 2.2rem;
+    height: 2.2rem;
+    border: 0.04rem solid #1d84a7;
+    border-radius: 0.16rem;
+    box-sizing: border-box;
+}
+
+.fenlei .main .lists p {
+    width: 100%;
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    font: 0.22rem/0.44rem '微软雅黑';
+    color: #ffffff;
+    background: #1d84a7;
+    border-radius: 0 0 .16rem .16rem;
+}

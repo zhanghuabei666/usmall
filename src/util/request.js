@@ -9,7 +9,8 @@ import qs from 'qs'
 
 // 响应拦截
 axios.interceptors.response.use(res=>{
-    // console.log(res);
+    console.log('请求数据=========');
+    console.log(res);
     return res
 })
 
@@ -66,17 +67,20 @@ export const getcatetree=()=>{
     })
 }
 // 获取分类商品
-export const getgoods=()=>{
+export const getgoods=(params)=>{
     return axios({
         url:"/api/getgoods",
-        method:"get"
+        method:"get",
+        params
     })
 }
 // 获取一个商品信息
-export const getgoodsinfo=()=>{
+export const getgoodsinfo=(params)=>{
     return axios({
         url:"/api/getgoodsinfo",
-        method:"get"
+        method:"get",
+        params
+
     })
 }
 

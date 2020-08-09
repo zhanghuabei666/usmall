@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import './Register.css'
 import Goback  from '../../components/GoBack/GoBack.js'
 import { Toast} from 'antd-mobile';
-// import Alert from '../../util/Alert/Alert'
 import { getRegister } from '../../util/request'
 export default class Login extends Component {
     constructor(props) {

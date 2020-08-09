@@ -1,5 +1,6 @@
 import React from 'react'
 import { Switch, Route ,Redirect} from 'react-router-dom'
+import './App.css'
 // import MyRoute from './pages/MyRoute/MyRoute'
 
 // 引入组件
@@ -10,7 +11,7 @@ import Detail from './pages/Detail/Detail'
 import FenInfo from './pages/FenInfo/FenInfo'
 export default function App() {
   return (
-    <div>
+    <div className='app'>
       <Switch>
         <Route path='/login' component={Login}></Route>
         <Route path='/reg' component={Register}></Route>

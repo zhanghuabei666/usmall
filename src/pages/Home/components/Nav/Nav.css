@@ -1,0 +1,18 @@
+.nav{
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+.nav li{
+    width: 1.5rem;
+}
+.nav li img{
+    width: 1.5rem;
+    height: 1.5rem;
+}
+.nav li p{
+    padding-top: 0.1rem;
+    text-align: center;
+    color: #666;
+    margin-bottom: 0.2rem;
+}

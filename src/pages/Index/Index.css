@@ -1,6 +1,9 @@
 .index{
+    background: #fff;
     width: 100%;
-    height: 100%;
+}
+.index_top{
+    margin-bottom: 0.8rem;
 }
 footer{
     width: 100%;
@@ -9,6 +12,7 @@ footer{
     left: 0;
     bottom: 0;
     border-top: 0.01rem solid #ccc;
+    background: #fff;
 }
 footer a{
     flex: 1;
