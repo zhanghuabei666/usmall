@@ -85,10 +85,11 @@ export const getgoodsinfo=(params)=>{
 }
 
 // 购物车列表
-export const getCartlist=()=>{
+export const getCartlist=(params)=>{
     return axios({
         url:"/api/cartlist",
-        method:"get"
+        method:"get",
+        params
     })
 }
 // 购物车添加
@@ -103,6 +104,14 @@ export const getCartadd=(data)=>{
 export const getCartdelete=(data)=>{
     return axios({
         url:"/api/cartdelete",
+        method:"post",
+        data:qs.stringify(data)
+    })
+}
+// 购物车修改
+export const getCartedit=(data)=>{
+    return axios({
+        url:"/api/cartedit",
         method:"post",
         data:qs.stringify(data)
     })

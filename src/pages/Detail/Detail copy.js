@@ -3,11 +3,19 @@ import { connect } from 'react-redux'
 import querystring from 'querystring'
 import { goodsinfo, requestGoodsinfoAction } from '../../store/index'
 import './Detail.css'
-import { getCartadd } from '../../util/request'
 import Goback from '../../components/GoBack/GoBack.js'
-import { Modal, List, Button, Toast } from 'antd-mobile';
+import { Modal, List, Button,Toast } from 'antd-mobile';
 
-
+function closest(el, selector) {
+    const matchesSelector = el.matches || el.webkitMatchesSelector || el.mozMatchesSelector || el.msMatchesSelector;
+    while (el) {
+        if (matchesSelector.call(el, selector)) {
+            return el;
+        }
+        el = el.parentElement;
+    }
+    return null;
+}
 
 class Detail extends Component {
     componentDidMount() {
@@ -22,28 +30,30 @@ class Detail extends Component {
         };
     }
 
+
+
     showModal = key => (e) => {
         e.preventDefault(); // 修复 Android 上点击穿透
         this.setState({
             [key]: true,
         });
     }
-    onClose = (key, id) => (e) => {
-        e.preventDefault(); // 修复 Android 上点击穿透
-        e.stopPropagation()
+    onClose = key => () => {
         this.setState({
             [key]: false,
         });
-        getCartadd({ uid: 123, id: id, num: 1 }).then(res => {
-            console.log(res);
-            if (res.data.code === 200) {
-                Toast.info(res.data.msg, 1);
-            } else {
-                Toast.info(res.data.msg, 1);
-            }
-        })
-        console.log(323234243434);
     }
+
+    onWrapTouchStart = (e) => {
+        if (!/iPhone|iPod|iPad/i.test(navigator.userAgent)) {
+            return;
+        }
+        const pNode = closest(e.target, '.am-modal-content');
+        if (!pNode) {
+            e.preventDefault();
+        }
+    }
+
     render() {
         const { goodsinfo } = this.props;
         // 判断是否有数据
@@ -51,9 +61,7 @@ class Detail extends Component {
             return (<div></div>)
         }
         // 将参数转数组
-        console.log(goodsinfo[0].specsattr);
         let arr = JSON.parse(goodsinfo[0].specsattr)
-        console.log(arr);
         return (
             <div className='detail'>
                 <h3>商品详情</h3>
@@ -68,6 +76,7 @@ class Detail extends Component {
                     visible={this.state.modal2}
                     onClose={this.onClose('modal2')}
                     animationType="slide-up"
+                    afterClose={() => { Toast.info("添加成功", 1); }}
                 >
                     <List className="popup-list">
                         <List.Item><img src={goodsinfo[0].img} />
@@ -79,7 +88,7 @@ class Detail extends Component {
                             })
                         }</List.Item>
                         <List.Item>
-                            <Button onClickCapture={this.onClose('modal2', goodsinfo[0].id)} className='btn1'>加入购物车</Button>
+                            <Button  onClick={this.onClose('modal2')} className='btn1'>加入购物车</Button>
                         </List.Item>
                     </List>
                 </Modal>

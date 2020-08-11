@@ -1,0 +1,73 @@
+.detail {
+    /* margin: 0.72rem 0; */
+    box-sizing: border-box;
+    position: relative;
+}
+
+.detail1 {
+    margin: 0.72rem 0;
+    box-sizing: border-box;
+}
+
+.footer {
+    width: 100%;
+    position: fixed;
+    bottom: -0.02rem;
+    left: 0;
+    background: #fff;
+    display: block !important;
+    border-top: 0.04rem solid #ccc;
+}
+
+.footer .btn {
+    float: right;
+    width: 2.2rem;
+    text-align: center;
+    background: #FB9700;
+    font: 0.36rem/0.82rem '微软雅黑';
+    color: #ffffff;
+    z-index: 11;
+    border: none;
+}
+
+.am-list-body {
+    width: 100%;
+    height: 5.5rem;
+    padding-top: 0.4rem;
+}
+.am-list-body .am-list-item img{
+    width: 1.78rem;
+    height: 1.78rem;
+    border-radius: 0.08rem;
+    border: 0.02rem solid #ccc;
+}
+.am-list-body .am-list-item i{
+    margin-left: 0.16rem;
+    font: 0.36rem/0.72rem '微软雅黑' !important;
+
+}
+.am-list-body .am-list-item h4{
+    font: bold 0.36rem/0.72rem '微软雅黑';
+}
+.am-list-body .am-list-item .btn1{
+    background: #FB9700 !important;
+    font: 0.36rem/0.72rem '微软雅黑';
+    height: 0.72rem;
+    color: #ffffff;
+    border: none;
+    text-align: center;
+    margin: 0 auto;
+    width: 2.22rem;
+    border: none !important;
+}
+.am-list-body .am-list-item em{
+    display: inline-block;
+    width: 0.9rem;
+    text-align: center;
+    margin: 0.2rem;
+    font: 0.2rem/0.65rem '微软雅黑';
+    height: 0.65rem;
+    padding-top: 0;
+    border: 0.02rem solid #ccc;
+    border-radius: 0.12rem;
+}

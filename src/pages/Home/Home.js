@@ -9,6 +9,7 @@ import Nav from './components/Nav/Nav'
 import List from './components/List/List'
 export default class Home extends Component {
     render() {
+        console.log(this.props);
         return (
             <div className='home'>
                 <div className="logo">
@@ -22,7 +23,7 @@ export default class Home extends Component {
                 <div className="banner">
                     <Banner></Banner>
                     <Nav></Nav>
-                    <List></List>
+                    <List {...this.props}></List>
                 </div>
             </div>
 

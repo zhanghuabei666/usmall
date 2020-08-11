@@ -35,6 +35,7 @@
 }
 .login .main .pass{
     margin-bottom: 0.16rem;
+    box-sizing: border-box;
 }
 .login .main p{
     height: .82rem;

@@ -19,6 +19,7 @@ h3 {
     margin-top: .72rem;
     display: flex;
     width: 100%;
+    box-sizing: border-box;
 }
 
 .fenlei .main .nav {
@@ -44,6 +45,7 @@ h3 {
     flex-wrap: wrap;
     display: flex;
     margin-left: 0.16rem;
+    box-sizing: border-box;
 }
 
 .fenlei .main .lists li {
@@ -52,6 +54,7 @@ h3 {
     margin: 0 .22rem 0.12rem 0;
     margin-bottom: 0.22rem;
     position: relative;
+    box-sizing: border-box;
 }
 
 .fenlei .main .lists img {

@@ -3,7 +3,7 @@ import { createStore, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 
 // 引入接口
-import { getbanner, getindexgoods, getcatetree, getgoods } from '../util/request'
+import { getbanner, getindexgoods, getcatetree, getgoods,getgoodsinfo,getCartlist,getCartedit } from '../util/request'
 
 // 初始状态
 const initState = {
@@ -13,10 +13,12 @@ const initState = {
     indexgoods: [],  // 获取商品信息(首页)
     // catetree: [],  // 获取分类树形结构
     goods: [],  // 获取分类商品
-    // goodsinfo: {},  // 获取一个商品信息
-    // Cartlist: [],  // 购物车列表
+    goodsinfo: [],  // 获取一个商品信息
+    cartlist: [],  // 购物车列表
     // Cartadd: {},  // 购物车添加
     // Cartdelete: {},  // 购物车删除
+    cartedit: [],  // 购物车修改
+
 }
 
 // Home页面开始
@@ -57,6 +59,25 @@ export const requestIndexGoodsAction = () => {
         })
     }
 }
+//改变商品信息详情
+const changeGoodsinfoAction = obj => {
+    return { type: 'changeGoodsinfo', list: obj }
+}
+// 一进页面发起商品信息请求
+export const requestGoodsinfoAction = (id) => {
+    return (dispatch, getState) => {
+        // 缓存层 ，有数据就不二次请求
+        // const {indexgoods}=getState()
+        // if(indexgoods.length>0){
+        //     return;
+        // }
+        // 发请求
+        getgoodsinfo({id:id}).then(res => {
+            dispatch(changeGoodsinfoAction(res.data.list))
+        })
+    }
+}
+
 // Home页面结束
 
 
@@ -97,6 +118,27 @@ export const requestGoodsAction = (id) => {
         })
     }
 }
+// 分类结束
+
+// 购物车列表
+const changeCartlistAction = arr => {
+    return { type: 'changeCartlist', list: arr }
+}
+// 一进页面发起分类信息请求
+export const requestCartlistAction = (id) => {
+    return (dispatch, getState) => {
+        // 缓存层 ，有数据就不二次请求
+        // const {cates}=getState()
+        // if(cates.length>0){
+        //     return;
+        // }
+        // 发请求
+        getCartlist({ uid: id }).then(res => {
+            dispatch(changeCartlistAction(res.data.list))
+        })
+    }
+}
+
 
 
 // reducer 修改state
@@ -114,6 +156,12 @@ const reducer = (state = initState, action) => {
                 ...state,
                 indexgoods: action.list
             }
+        // 修改商品信息详情
+        case "changeGoodsinfo":
+            return {
+                ...state,
+                goodsinfo: action.list
+            }
         // 修改分类信息
         case "changeCate":
             return {
@@ -126,6 +174,13 @@ const reducer = (state = initState, action) => {
                 ...state,
                 goods: action.list
             }
+        // 修改购物车
+        case "changeCartlist":
+            return {
+                ...state,
+                cartlist: action.list
+            }
+       
 
         default:
             return state;
@@ -140,6 +195,8 @@ export const banners = (state) => state.banners
 export const indexgoods = (state) => state.indexgoods
 export const cate = (state) => state.cate
 export const goods = (state) => state.goods
+export const goodsinfo = (state) => state.goodsinfo
+export const cartlist = (state) => state.cartlist
 
 export default store
 

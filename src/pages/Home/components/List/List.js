@@ -1,14 +1,24 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import querystring from 'querystring'
 import { indexgoods, requestIndexGoodsAction } from '../../../../store/index'
-import './List.css'
+// import './List.css'
+// import Goback  from '../../components/GoBack/GoBack.js'
+
+
 class List extends Component {
+
     componentDidMount() {
+        const result = querystring.parse(this.props.location.search.slice(1));
         // 一进页面就发起请求   
-        this.props.requestList();
+        this.props.requestList(result.id);
+    }
+    detail(id){
+        this.props.history.push('/detail?id='+id)
     }
     render() {
-        const [indexgoods] = this.props.indexgoods;
+        const {indexgoods} = this.props;
+        // 将数据对象转成对象
         function objOfValueToArr(object) {
             var arr = [];
             var i = 0;
@@ -18,12 +28,14 @@ class List extends Component {
             }
             return arr;
         }
-        let lists = indexgoods === undefined ? null : objOfValueToArr(indexgoods)[0];
+        let lists = indexgoods === undefined ? null : objOfValueToArr(indexgoods[0]);
         return (
-            <ul className='ulList'>
+            <div>
+              
+              <ul className='ulList'>
                 {
-                    lists === null ? null : lists.map(item => {
-                        return <li key={item.id}>
+                    lists[0] === undefined ? null : lists[0].map(item => {
+                        return <li key={item.id} onClick={()=>this.detail(item.id)}>
                             <img src={item.img} alt="" />
                             <div>
                                 <p className='name'>{item.goodsname}</p>
@@ -35,6 +47,7 @@ class List extends Component {
                 }
 
             </ul>
+            </div>
         )
     }
 }
@@ -42,7 +55,6 @@ class List extends Component {
 
 // 请求的数据
 const mapStateToProps = (state) => {
-    console.log(state);
     return {
         indexgoods: indexgoods(state)
     }
@@ -50,10 +62,11 @@ const mapStateToProps = (state) => {
 // 请求方法
 const mapDispatchToProps = dispatch => {
     return {
-        requestList: () => dispatch(requestIndexGoodsAction())
+        requestList: (id) => dispatch(requestIndexGoodsAction(id))
     }
 }
 
 //导出
 export default connect(mapStateToProps, mapDispatchToProps)(List)
+
 

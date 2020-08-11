@@ -12,20 +12,20 @@ class FenInfo extends Component {
         // 一进页面就发起请求   
         this.props.requestList(result.id);
     }
+    detail(id){
+        this.props.history.push('/detail?id='+id)
+    }
     render() {
         const { goods, location } = this.props;
-        console.log(location);
         const name = querystring.parse(location.search.slice(1));
-        console.log(name);
         return (
             <div>
                 <h3>{name.name}</h3>
                 <span className='goback'><Goback></Goback></span>
                 <ul className='ulList'>
-
                     {
                         goods === null ? null : goods.map(item => {
-                            return <li key={item.id}>
+                            return <li key={item.id} onClick={()=>this.detail(item.id)}>
                                 <img src={item.img} alt="" />
                                 <div>
                                     <p className='name'>{item.goodsname}</p>
@@ -44,7 +44,6 @@ class FenInfo extends Component {
 
 // 请求的数据
 const mapStateToProps = (state) => {
-    console.log(state);
     return {
         goods: goods(state)
     }
