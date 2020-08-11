@@ -1,24 +1,30 @@
+
 // 搭建状态层
 import { createStore, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 
 // 引入接口
-import { getbanner, getindexgoods, getcatetree, getgoods,getgoodsinfo,getCartlist,getCartedit } from '../util/request'
+import { getbanner, getindexgoods, getcatetree, getgoods, getgoodsinfo, getCartlist,getCartedit,getCartdelete } from '../util/request'
 
 // 初始状态
 const initState = {
+    user: sessionStorage.getItem("user") ? JSON.parse(sessionStorage.getItem("user")) : null,//存登录信息
     banner: [],  //轮播图数据
     cate: [],   // 获取分类信息(首页)
-    // seckill: [],   // 获取限时秒杀信息(首页)
     indexgoods: [],  // 获取商品信息(首页)
-    // catetree: [],  // 获取分类树形结构
     goods: [],  // 获取分类商品
     goodsinfo: [],  // 获取一个商品信息
     cartlist: [],  // 购物车列表
-    // Cartadd: {},  // 购物车添加
-    // Cartdelete: {},  // 购物车删除
-    cartedit: [],  // 购物车修改
+    isEditor: false,//是否编辑
+    isAll: false,//是否全选
+}
 
+//修改user的action 
+export const changeUserAction = user => {
+    return {
+        type: "changeUser",
+        user
+    }
 }
 
 // Home页面开始
@@ -72,7 +78,7 @@ export const requestGoodsinfoAction = (id) => {
         //     return;
         // }
         // 发请求
-        getgoodsinfo({id:id}).then(res => {
+        getgoodsinfo({ id: id }).then(res => {
             dispatch(changeGoodsinfoAction(res.data.list))
         })
     }
@@ -118,32 +124,70 @@ export const requestGoodsAction = (id) => {
         })
     }
 }
+
 // 分类结束
 
+
 // 购物车列表
-const changeCartlistAction = arr => {
-    return { type: 'changeCartlist', list: arr }
+const changeCartlistAction = list => {
+    return { type: 'changeCartlist', list }
 }
-// 一进页面发起分类信息请求
+// 一进页面发起购物车列表请求
 export const requestCartlistAction = (id) => {
     return (dispatch, getState) => {
-        // 缓存层 ，有数据就不二次请求
-        // const {cates}=getState()
-        // if(cates.length>0){
-        //     return;
-        // }
         // 发请求
         getCartlist({ uid: id }).then(res => {
-            dispatch(changeCartlistAction(res.data.list))
+            const list = res.data.list ? res.data.list : [];
+            list.forEach(item => {
+                item.checked = false
+            })
+            dispatch(changeCartlistAction(list))
         })
     }
 }
 
+//修改isEdior 
+export const changeIsEditorAction = () => ({
+    type: "changeIsEditor"
+})
 
+//修改isAll
+export const changeIsAllAction = () => ({
+    type: "changeIsAll"
+})
+
+//修改某条数据的checked
+export const changeOneAction = index => ({
+    type: "changeOne",
+    index
+})
+
+//用户在组件点了+ - 
+export const requestEditAction=data=>{
+    return (dispatch)=>{
+        getCartedit(data).then(res=>{
+        })
+    }
+}
+
+//删除
+export const requestDelAction=id=>{
+    return (dispatch)=>{
+        getCartdelete({id:id}).then(res=>{
+            dispatch(requestCartlistAction())
+        })
+    }
+}
 
 // reducer 修改state
 const reducer = (state = initState, action) => {
     switch (action.type) {
+        // 修改用户
+        case "changeUser":
+            return {
+                ...state,
+                user: action.user
+            }
         // 修改轮播图
         case "changeBanner":
             return {
@@ -174,13 +218,37 @@ const reducer = (state = initState, action) => {
                 ...state,
                 goods: action.list
             }
+        // 是否编辑
+        case "changeIsEditor":
+            return {
+                ...state,
+                isEditor: !state.isEditor
+            }
+        // 是否全选
+        case "changeIsAll":
+            return {
+                ...state,
+                isAll: !state.isAll,
+                cartlist: state.cartlist.map(item => {
+                    item.checked = !state.isAll;
+                    return item
+                })
+            }
+        case "changeOne":
+            const { cartlist } = state
+            console.log(state);
+            cartlist[action.index].checked = !cartlist[action.index].checked
+            return {
+                ...state,
+                cartlist: [...cartlist],
+                isAll: cartlist.every(item => item.checked)
+            }
         // 修改购物车
         case "changeCartlist":
             return {
                 ...state,
                 cartlist: action.list
             }
-       
 
         default:
             return state;
@@ -190,14 +258,33 @@ const reducer = (state = initState, action) => {
 // 创建仓库
 const store = createStore(reducer, applyMiddleware(thunk));
 
-// 导出数据
+// 导出状态
+export const getUser = (state) => state.user
 export const banners = (state) => state.banners
 export const indexgoods = (state) => state.indexgoods
 export const cate = (state) => state.cate
 export const goods = (state) => state.goods
 export const goodsinfo = (state) => state.goodsinfo
 export const cartlist = (state) => state.cartlist
+export const isEditor = (state) => state.isEditor
+export const isAll = (state) => state.isAll
+export const getAllPrice = state => {
+    /*
+ var sum=0;
+ const {list}=state.shop
+ list.forEach(item=>{
+ if(item.checked){
+ sum+=item.price*item.num
+ }
+ })
+ return sum*/
+//  计算总价
+const { cartlist } = state
+return cartlist.reduce((val, item) => item.checked ? val + item.price * item.num : val, 0)
+}
 
 export default store
+
+
 
 

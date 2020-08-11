@@ -1,0 +1,127 @@
+.main {
+    position: relative;
+}
+
+.main header {
+    width: 100%;
+    height: 2.84rem;
+    background: #ff9900;
+    position: relative;
+}
+
+.main header h4 {
+    text-align: center;
+    font: 0.36rem/0.62rem '微软雅黑';
+    color: #fff;
+}
+
+.main header .a1 {
+    position: absolute;
+    top: 0.14rem;
+    left: 0.26rem;
+}
+
+.main header .a2 {
+    position: absolute;
+    top: 0.14rem;
+    right: 0.26rem !important;
+}
+
+.main header em {
+    position: absolute;
+    top: 0;
+    right: 0.08rem !important;
+}
+
+.main header em .am-badge-text {
+    background: red;
+}
+.main .user{
+    width: 1.84rem;
+    height: 1.84rem;
+    position: absolute;
+    top: 1.8rem;
+    left: 50%;
+    transform: translate(-50%,0);
+}
+.main .user img{
+    display: block;
+    width: 1.84rem;
+    height: 1.84rem;
+    border: 0.12rem solid #fff;
+    border-radius: 50%;
+    box-sizing: border-box;
+}
+.main .user p{
+    text-align: center;
+    font: 0.24rem/0.6rem '微软雅黑';
+    color: #333;
+}
+.main .collect{
+    font: 0.26rem/1.02rem '微软雅黑';
+    color: #000000;
+    margin-top: 2.32rem;
+    margin-left: 0.32rem;
+}
+.main .collect img{
+    display: inline-block;
+    padding-right: 0.2rem;
+    vertical-align: middle;
+}
+.main .nav{
+    width: 100%;
+    display: block;
+    border-bottom: 0.12rem solid #fafafa;
+    border-top: 0.12rem solid #fafafa;
+}
+.main .nav .navBar{
+    display: flex;
+    height: 1.5rem;
+    border-bottom: 0.02rem solid #333333;
+}
+.main .nav .navBar .aa{
+    text-align: center;
+    flex:1;
+    display: block;
+    font: 0.26rem/1.5rem '微软雅黑';
+    color: #666;
+}
+.main .nav .navBar .order{
+    color: #000;
+}
+.main .nav .navList{
+    display: flex;
+    justify-content: space-between;
+}
+.main .nav .navList li{
+    position: relative;
+}
+.main .nav .navList li p{
+    padding-top: 0.4rem;
+    text-align: center;
+    color: #666;
+    margin-bottom: 0;
+}
+.main .nav .navList li .lists{
+    width: 100%;
+    font: 0.22rem/.74rem '微软雅黑';
+    color: #666666;
+    text-align: center;
+    padding-top:0;
+}
+.main .nav .navList li p img{
+    width: 0.46rem;
+    height: 0.46rem;
+    display: inline-block;
+    text-align: center;
+}
+.main .nav .navList li em{
+     position: absolute;
+     top: 0.22rem;
+     left: 0.76rem;
+}
+.main .address{
+    font: 0.26rem/1.16rem '微软雅黑';
+    color: #666666;
+    padding-left: 0.4rem;
+}

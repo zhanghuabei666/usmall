@@ -60,7 +60,7 @@
     width: 2.22rem;
     border: none !important;
 }
-.am-list-body .am-list-item em{
+.am-list-body .am-list-item .am-tag {
     display: inline-block;
     width: 0.9rem;
     text-align: center;

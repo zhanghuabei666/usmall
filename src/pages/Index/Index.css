@@ -5,23 +5,3 @@
 .index_top{
     margin-bottom: 0.8rem;
 }
-footer{
-    width: 100%;
-    position: fixed;
-    display: flex !important;
-    left: 0;
-    bottom: 0;
-    border-top: 0.01rem solid #ccc;
-    background: #fff;
-}
-footer a{
-    flex: 1;
-    color: #1C1C1C;
-    text-decoration: none;
-    font: 0.4rem/0.8rem '微软雅黑';
-    height: 46px;
-    text-align: center;
-}
-footer .active{
-    color: #FF9A00;
-}

@@ -4,7 +4,8 @@ import querystring from 'querystring'
 import { indexgoods, requestIndexGoodsAction } from '../../../../store/index'
 // import './List.css'
 // import Goback  from '../../components/GoBack/GoBack.js'
-
+// 引入filter
+import { filterPrice } from '../../../../filters/filters'
 
 class List extends Component {
 
@@ -39,7 +40,7 @@ class List extends Component {
                             <img src={item.img} alt="" />
                             <div>
                                 <p className='name'>{item.goodsname}</p>
-                                <p className='plirce'>￥{item.price}</p>
+                                <p className='plirce'>￥{filterPrice(item.price)}</p>
                                 <span>立刻抢购</span>
                             </div>
                         </li>

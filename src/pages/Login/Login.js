@@ -3,8 +3,10 @@ import { NavLink } from "react-router-dom"
 import './Login.css'
 
 import { Toast} from 'antd-mobile';
+import {connect} from "react-redux"
 import { getLogin } from '../../util/request'
-export default class Login extends Component {
+import {changeUserAction} from "../../store/index"
+class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -14,6 +16,7 @@ export default class Login extends Component {
             }
         }
     }
+    // 修改user
     changeUser(e, key) {
         this.setState({
             user: {
@@ -25,6 +28,9 @@ export default class Login extends Component {
     login() {
         getLogin(this.state.user).then(res => {
             if (res.data.code === 200) {
+                //要把res.data.list 存进redux/user/user 
+                this.props.changeUser(res.data.list)
+                sessionStorage.setItem("user",JSON.stringify(res.data.list))
                 this.props.history.push('/index');
                 Toast.info(res.data.msg, 1);
             } else {
@@ -55,3 +61,16 @@ export default class Login extends Component {
         )
     }
 }
+
+const mapState=(state)=>{
+    console.log(state)
+    return {
+      
+    }
+}
+const mapDispatch=(dispatch)=>{
+    return {
+        changeUser:(user)=>dispatch(changeUserAction(user))
+    }
+}
+export default  connect(mapState,mapDispatch)(Login)

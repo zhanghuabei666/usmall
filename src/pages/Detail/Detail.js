@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import querystring from 'querystring'
-import { goodsinfo, requestGoodsinfoAction } from '../../store/index'
+import { goodsinfo, requestGoodsinfoAction,getUser } from '../../store/index'
 import './Detail.css'
 import { getCartadd } from '../../util/request'
 import Goback from '../../components/GoBack/GoBack.js'
-import { Modal, List, Button, Toast } from 'antd-mobile';
+import { Modal, List, Button, Toast,Tag } from 'antd-mobile';
 
 
 
@@ -34,26 +34,22 @@ class Detail extends Component {
         this.setState({
             [key]: false,
         });
-        getCartadd({ uid: 123, id: id, num: 1 }).then(res => {
-            console.log(res);
+        getCartadd({uid:this.props.getUser.uid,goodsid:id,num:1}).then(res => {
             if (res.data.code === 200) {
                 Toast.info(res.data.msg, 1);
             } else {
                 Toast.info(res.data.msg, 1);
             }
         })
-        console.log(323234243434);
     }
     render() {
-        const { goodsinfo } = this.props;
+        const { goodsinfo ,getUser} = this.props;
         // 判断是否有数据
         if (!goodsinfo.length) {
             return (<div></div>)
         }
         // 将参数转数组
-        console.log(goodsinfo[0].specsattr);
         let arr = JSON.parse(goodsinfo[0].specsattr)
-        console.log(arr);
         return (
             <div className='detail'>
                 <h3>商品详情</h3>
@@ -75,7 +71,7 @@ class Detail extends Component {
                         <List.Item> <h4>{goodsinfo[0].specsname}</h4></List.Item>
                         <List.Item>{
                             arr.map(item => {
-                                return <em key={item}>{item}</em>
+                                return <Tag data-seed="logId" key={item}>{item}</Tag >
                             })
                         }</List.Item>
                         <List.Item>
@@ -91,9 +87,9 @@ class Detail extends Component {
 
 // 请求的数据
 const mapStateToProps = (state) => {
-    console.log(state);
     return {
-        goodsinfo: goodsinfo(state)
+        goodsinfo: goodsinfo(state),
+        getUser:getUser(state),
     }
 }
 // 请求方法
