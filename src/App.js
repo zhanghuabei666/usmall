@@ -1,7 +1,7 @@
 import React from 'react'
 import { Switch, Route ,Redirect} from 'react-router-dom'
 import './App.css'
-// import MyRoute from './pages/MyRoute/MyRoute'
+import MyRoute from './pages/MyRoute/MyRoute'
 
 // 引入组件
 import Login from './pages/Login/Login'
@@ -15,9 +15,9 @@ export default function App() {
       <Switch>
         <Route path='/login' component={Login}></Route>
         <Route path='/reg' component={Register}></Route>
-        <Route path='/index' component={Index}></Route>
-        <Route path='/detail' component={Detail}></Route>
-        <Route path='/fenInfo' component={FenInfo}></Route>
+        <MyRoute path='/index' component={Index}></MyRoute>
+        <MyRoute path='/detail' component={Detail}></MyRoute>
+        <MyRoute path='/fenInfo' component={FenInfo}></MyRoute>
         <Redirect to='/login'></Redirect>
       </Switch>
     </div>

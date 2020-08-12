@@ -13,7 +13,11 @@ class Banner extends Component {
         const { banners } = this.props;
         return (
             <div className='banners'>
-                <Carousel>
+                <Carousel
+               frameOverflow="visible"
+               autoplay
+               infinite
+                >
                     {banners===undefined?null:banners.map(item => {
                         return <img src={this.$img+item.img} key={item.id} alt="" />
                     })}

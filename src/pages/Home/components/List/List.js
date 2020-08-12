@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import querystring from 'querystring'
 import { indexgoods, requestIndexGoodsAction } from '../../../../store/index'
-// import './List.css'
+import './List.css'
 // import Goback  from '../../components/GoBack/GoBack.js'
 // 引入filter
 import { filterPrice } from '../../../../filters/filters'

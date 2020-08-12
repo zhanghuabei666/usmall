@@ -4,7 +4,7 @@ import './Nav.css'
 export default class Nav extends Component {
     render() {
         return (
-            <ul className='nav'>
+            <ul className='nav1'>
                 <li>
                     <img src={src} alt=""/>
                     <p>限时抢购</p>

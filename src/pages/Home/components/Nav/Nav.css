@@ -1,16 +1,16 @@
-.nav{
+.nav1{
     display: flex;
     justify-content: space-around;
     width: 100%;
 }
-.nav li{
+.nav11 li{
     width: 1.5rem;
 }
-.nav li img{
+.nav1 li img{
     width: 1.5rem;
     height: 1.5rem;
 }
-.nav li p{
+.nav1 li p{
     padding-top: 0.1rem;
     text-align: center;
     color: #666;

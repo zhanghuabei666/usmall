@@ -8,16 +8,17 @@ import Fenlei from '../../pages/Fenlei/Fenlei'
 import Cart from '../../pages/Cart/Cart'
 import Main from '../../pages/Main/Main'
 import Footer from './components/Footer/Footer'
+import MyRoute from '../MyRoute/MyRoute'
 export default class Index extends Component {
     render() {
         return (
             <div className='index'>
                 <div className="index_top">
                     <Switch>
-                        <Route path='/index/home' component={Home}></Route>
-                        <Route path='/index/fenlei' component={Fenlei}></Route>
-                        <Route path='/index/cart' component={Cart}></Route>
-                        <Route path='/index/main' component={Main}></Route>
+                        <MyRoute path='/index/home' component={Home}></MyRoute>
+                        <MyRoute path='/index/fenlei' component={Fenlei}></MyRoute>
+                        <MyRoute path='/index/cart' component={Cart}></MyRoute>
+                        <MyRoute path='/index/main' component={Main}></MyRoute>
                         <Redirect to='/index/home'></Redirect>
                     </Switch>
                 </div>

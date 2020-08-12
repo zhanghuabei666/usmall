@@ -1,8 +1,14 @@
-.cart .lists {
-    margin: 0.72rem 0 4rem 0.3rem;
-    /* margin-left: 0.3rem; */
+.cart{
+    overflow: hidden;
+}
+.cart .resultsP{
+    margin: 3rem 0 4rem 0.3rem;
     box-sizing: border-box;
+}
 
+.cart .lists {
+    margin: 1rem 0 4rem 0.3rem;
+    box-sizing: border-box;
 }
 .cart .tables{
     width: 100%;
@@ -83,7 +89,7 @@
     background: red;
     margin-left: .2rem;
     color: #fff;
-    transition: all 0.3s;
+    transition: all 1s;
 }
 .cart .tables .tr2 .th55{
     position: relative;

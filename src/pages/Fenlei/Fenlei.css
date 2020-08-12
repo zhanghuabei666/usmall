@@ -1,6 +1,6 @@
 .fenlei {
     width: 100%;
-    height: 100%;
+    overflow: hidden;
 }
 
 h3 {
@@ -8,7 +8,7 @@ h3 {
     width: 100%;
     top: 0;
     left: 0;
-    font: 0.36rem/0.72rem '微软雅黑';
+    font: 0.36rem/1rem '微软雅黑';
     color: #ffffff;
     background: #ff9900;
     text-align: center;
@@ -16,29 +16,28 @@ h3 {
 }
 
 .fenlei .main {
-    margin-top: .72rem;
+    margin-top: 1rem;
     display: flex;
     width: 100%;
     box-sizing: border-box;
 }
 
-.fenlei .main .nav {
+.fenlei .main .navL {
     display: block;
     width: 2.08rem;
 }
 
-.fenlei .main .nav span {
+.fenlei .main .navL span {
     display: block;
     width: 2.08rem;
     font: 0.22rem/0.82rem '微软雅黑';
     text-align: center;
 }
-.fenlei .main .nav .select{
+.fenlei .main .navL .select{
     background: #fafafa;
     color: #ff9900;
     border-left: 0.08rem solid #1d84a7;
-    box-sizing: border-box;
-    
+    box-sizing: border-box;  
 }
 
 .fenlei .main .lists {

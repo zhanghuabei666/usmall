@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { Badge } from 'antd-mobile';
 import './Main.css'
+import { connect } from 'react-redux'
+import { getUser } from '../../store/index'
 // 引入图片
 import a1 from '../../assets/img/set.png'
 import a2 from '../../assets/img/news.png'
@@ -11,8 +13,9 @@ import consignee from '../../assets/img/icon_consignee.png'
 import evaluate from '../../assets/img/icon_evaluate.png'
 import refund from '../../assets/img/icon_refund.png'
 
-export default class Main extends Component {
+class Main extends Component {
     render() {
+        const { getUser } = this.props
         return (
             <div className='main'>
                 <header>
@@ -23,7 +26,7 @@ export default class Main extends Component {
                 </header>
                 <div className="user">
                     <img src={user} alt="" />
-                    <p>小不点</p>
+                    <p>{getUser.nickname}</p>
                 </div>
                 <div className="collect">
                     <img src={keep} alt="" />
@@ -36,17 +39,17 @@ export default class Main extends Component {
                     </div>
                     <ul className="navList">
                         <li>
-                        <p><img src={refund} alt="" /></p>
+                            <p><img src={refund} alt="" /></p>
                             <p className='lists'>待付款</p>
                             <em><Badge text="9+" hot /></em>
                         </li>
                         <li>
-                        <p><img src={consignee} alt="" /></p>
+                            <p><img src={consignee} alt="" /></p>
                             <p className='lists'>待发货</p>
                             <em><Badge text="9+" hot /></em>
                         </li>
                         <li>
-                        <p><img src={evaluate} alt="" /></p>
+                            <p><img src={evaluate} alt="" /></p>
                             <p className='lists'>待收货</p>
                             <em><Badge text="9+" hot /></em>
                         </li>
@@ -55,7 +58,7 @@ export default class Main extends Component {
                             <p className='lists'>收藏</p>
                             <em><Badge text="9+" hot /></em>
                         </li>
-                        
+
                     </ul>
                 </div>
                 <div className="address">
@@ -65,3 +68,13 @@ export default class Main extends Component {
         )
     }
 }
+// 请求的数据
+const mapStateToProps = (state) => {
+    return {
+        getUser: getUser(state),
+    }
+}
+
+//导出
+export default connect(mapStateToProps)(Main)
+

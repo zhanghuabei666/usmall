@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { cartlist, requestCartlistAction, changeIsAllAction, isEditor, changeIsEditorAction, isAll,changeOneAction,requestEditAction,requestDelAction,getAllPrice,getUser} from '../../store/index'
-import { Toast} from 'antd-mobile';
+import { cartlist, requestCartlistAction, changeIsAllAction, isEditor, changeIsEditorAction, isAll, changeOneAction, requestEditAction, requestDelAction, getAllPrice, getUser } from '../../store/index'
+import { Toast, Modal } from 'antd-mobile';
 import './Cart.css'
+import ResultsP from './components/ResultsP/ResultsP'
 // 引入filter
 import { filterPrice } from '../../filters/filters'
 // 引入图片
@@ -11,6 +12,7 @@ import editor_hig from '../../assets/img/editor_hig.png'
 import store from '../../assets/img/store.png'
 import radio_nor from '../../assets/img/radio_nor.png'
 import radio_hig from '../../assets/img/radio_hig.png'
+import { getCartdelete } from '../../util/request';
 
 
 class Cart extends Component {
@@ -24,81 +26,96 @@ class Cart extends Component {
             Toast.info('宝贝不能再少了', 1);
             return
         }
-        this.props.requestEditAction({ id: item.id, type:1 })
+        this.props.requestEditAction({ id: item.id, type: 1 })
         this.props.requestList(this.props.getUser.uid)
     }
-    
-    add(item,type){
+
+    add(item, type) {
         this.props.requestEditAction({ id: item.id, type })
         this.props.requestList(this.props.getUser.uid)
     }
-    render() {
-        const { cartlist, changeIsEditor, isAll, isEditor, changeIsAll,changeOne,requestDelAction,getAllPrice, } = this.props;
+    // 删除
+    del(id) {
+        const { getUser, requestList } = this.props
+        Modal.alert('', '你确定要删除吗?', [
+            { text: '取消', onPress: () => null },
+            {
+                text: '确认', onPress: () => getCartdelete({ id }).then(res => {
+                    if (res.data.code === 200) {
+                        requestList(getUser.uid)
+                        Toast.success(res.data.msg, 1)
+                    }
+                })
+            },
+        ])
 
-        // 计算总价
-        let allPrice = 0;
-        cartlist.forEach(item => {
-            allPrice += item.price * item.num
-        })
+    }
+    render() {
+        const { cartlist, changeIsEditor, isAll, isEditor, changeIsAll, changeOne, getAllPrice, } = this.props;
 
         return (
             <div className='cart'>
                 <h3>购物车</h3>
-                <div className='lists inner'>
-                    {
-                        cartlist.map((item, index) => {
-                            return <table className='tables' key={item.id}>
+                {cartlist.length === 0 ? <div className="resultsP"><ResultsP></ResultsP></div> :
+                    <div>
+                        <div className='lists'>
+                            {
+                                cartlist.map((item, index) => {
+                                    return <table className='tables' key={item.id}>
+                                        <tbody>
+                                            <tr className='tr1'>
+                                                <th className='th1' colSpan="4">
+                                                    <img src={store} alt="" />
+                                                    <em>杭州办税区仓</em>
+                                                </th>
+                                            </tr>
+                                            <tr className='tr2'>
+                                                <th className='th1'>
+                                                    <img src={item.checked ? radio_hig : radio_nor} onClick={() => changeOne(index)} alt="" />
+                                                </th>
+                                                <th className='th2'>
+                                                    <img src={item.img} alt="" />
+                                                </th>
+                                                <th className='th3'>
+                                                    <p className='p1'>{item.goodsname}</p>
+                                                    <p className='p2'>
+                                                        <button onClick={() => this.sub(item)}>-</button>
+                                                        <button>{item.num}</button>
+                                                        <button onClick={() => this.add(item, 2)}>+</button>
+                                                    </p>
+                                                    <em>总价：{filterPrice(item.num * item.price)}</em>
+                                                </th>
+                                                <th className='th4'>{"￥" + filterPrice(item.price)}</th>
+                                                <th className={!isEditor ? 'th5' : 'th55'}><div className="shop-item-del" onClick={() => this.del(item.id)}>删除</div></th>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                })
+                            }
+                        </div>
+                        <footer className='footers'>
+                            <table className='tables'>
                                 <tbody>
-                                    <tr className='tr1'>
-                                        <th className='th1' colSpan="4">
-                                            <img src={store} alt="" />
-                                            <em>杭州办税区仓</em>
-                                        </th>
-                                    </tr>
-                                    <tr className='tr2'>
-                                        <th className='th1'>
-                                            <img src={item.checked ? radio_hig : radio_nor} onClick={() => changeOne(index)} alt="" />
-                                        </th>
-                                        <th className='th2'>
-                                            <img src={item.img} alt="" />
+                                    <tr className='tr'>
+                                        <th className='th1' onClick={() => changeIsAll()}><img src={isAll ? radio_hig : radio_nor} alt="" /><em>全选</em></th>
+                                        <th className='th2' onClick={() => changeIsEditor()}>
+                                            <img src={isEditor ? editor_hig : editor_nor} alt="" />
+                                            <em>编辑</em>
                                         </th>
                                         <th className='th3'>
-                                            <p className='p1'>{item.goodsname}</p>
-                                            <p className='p2'>
-                                                <button onClick={() => this.sub(item)}>-</button>
-                                                <button>{item.num}</button>
-                                                <button onClick={() => this.add(item,2)}>+</button>
-                                            </p>
-                                            <em>总价：{filterPrice(item.num * item.price)}</em>
+                                            <p className='p1'>合计:{filterPrice(getAllPrice)}</p>
+                                            <p className='p2'>（不含运费）</p>
                                         </th>
-                                        <th className='th4'>{"￥" + filterPrice(item.price)}</th>
-                                        <th className={!isEditor ? 'th5' : 'th55'}><div className="shop-item-del" onClick={()=>requestDelAction(item.id)} >删除</div></th>
+                                        <th className="th4">
+                                            <button>去结算</button>
+                                        </th>
                                     </tr>
                                 </tbody>
                             </table>
-                        })
-                    }
-                </div>
-                <footer className='footers'>
-                    <table className='tables'>
-                        <tbody>
-                            <tr className='tr'>
-                                <th className='th1' onClick={() => changeIsAll()}><img src={isAll ? radio_hig : radio_nor} alt="" /><em>全选</em></th>
-                                <th className='th2' onClick={() => changeIsEditor()}>
-                                    <img src={isEditor ? editor_hig : editor_nor} alt="" />
-                                    <em>编辑</em>
-                                </th>
-                                <th className='th3'>
-                                    <p className='p1'>合计:{filterPrice(getAllPrice)}</p>
-                                    <p className='p2'>（不含运费）</p>
-                                </th>
-                                <th className="th4">
-                                    <button>去结算</button>
-                                </th>
-                            </tr>
-                        </tbody>
-                    </table>
-                </footer>
+                        </footer>
+
+                    </div>
+                }
             </div>
         )
     }
@@ -108,7 +125,7 @@ class Cart extends Component {
 // 请求的数据
 const mapStateToProps = (state) => {
     return {
-        getUser:getUser(state),
+        getUser: getUser(state),
         cartlist: cartlist(state),
         isEditor: isEditor(state),
         isAll: isAll(state),
@@ -121,7 +138,7 @@ const mapDispatchToProps = dispatch => {
         requestList: (id) => dispatch(requestCartlistAction(id)),
         changeIsEditor: () => dispatch(changeIsEditorAction()),
         changeIsAll: () => dispatch(changeIsAllAction()),
-        changeOne: (index) => dispatch(changeOneAction(index)),requestEditAction: (data) => dispatch(requestEditAction(data)),
+        changeOne: (index) => dispatch(changeOneAction(index)), requestEditAction: (data) => dispatch(requestEditAction(data)),
         requestDelAction: id => dispatch(requestDelAction(id))
     }
 }

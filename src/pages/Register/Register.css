@@ -21,11 +21,11 @@
     color: #fff;
     display: block;
     position: absolute;
-    top: 0;
+    top: .2rem;
     left: 0.26rem;
 }
 .register .main{
-    /* width: 100%; */
+    width: 92%;
     margin: 1.7rem 0.27rem 0 0.27rem;
 }
 .register .main div{

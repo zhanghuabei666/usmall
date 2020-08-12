@@ -28,7 +28,7 @@ class Fenlei extends Component {
             <div className='fenlei'>
                 <h3>分类</h3>
                 <div className="main">
-                    <div className="nav">
+                    <div className="navL">
                         {
                             cate === undefined ? null : cate.map((item, index) => {
                                 return <span onClick={() => this.changeN(index)} className={n === index ? 'select' : ''} key={item.id}>{item.catename}</span>
@@ -55,7 +55,6 @@ class Fenlei extends Component {
 
 // 请求的数据
 const mapStateToProps = (state) => {
-    console.log(state);
     return {
         cate: cate(state)
     }

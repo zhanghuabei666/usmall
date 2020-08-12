@@ -1,9 +1,11 @@
 .main {
+    width: 100vw;
     position: relative;
+    overflow: hidden;
 }
 
 .main header {
-    width: 100%;
+    width: 100vw;
     height: 2.84rem;
     background: #ff9900;
     position: relative;
@@ -69,7 +71,7 @@
     vertical-align: middle;
 }
 .main .nav{
-    width: 100%;
+    width: 100w;
     display: block;
     border-bottom: 0.12rem solid #fafafa;
     border-top: 0.12rem solid #fafafa;
@@ -95,6 +97,7 @@
 }
 .main .nav .navList li{
     position: relative;
+    flex: 1;
 }
 .main .nav .navList li p{
     padding-top: 0.4rem;
@@ -118,7 +121,7 @@
 .main .nav .navList li em{
      position: absolute;
      top: 0.22rem;
-     left: 0.76rem;
+     left: 0.9rem;
 }
 .main .address{
     font: 0.26rem/1.16rem '微软雅黑';

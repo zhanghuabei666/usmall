@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import querystring from 'querystring'
 import { goods, requestGoodsAction } from '../../store/index'
 import './FenInfo.css'
-import Goback  from '../../components/GoBack/GoBack.js'
+import Goback from '../../components/GoBack/GoBack.js'
 // 引入filter
 import { filterPrice } from '../../filters/filters'
 
@@ -13,8 +13,8 @@ class FenInfo extends Component {
         // 一进页面就发起请求   
         this.props.requestList(result.id);
     }
-    detail(id){
-        this.props.history.push('/detail?id='+id)
+    detail(id) {
+        this.props.history.push('/detail?id=' + id)
     }
     render() {
         const { goods, location } = this.props;
@@ -23,10 +23,10 @@ class FenInfo extends Component {
             <div>
                 <h3>{name.name}</h3>
                 <span className='goback'><Goback></Goback></span>
-                <ul className='ulList'>
+                <ul className='ulList1'>
                     {
                         goods === null ? null : goods.map(item => {
-                            return <li key={item.id} onClick={()=>this.detail(item.id)}>
+                            return <li key={item.id} onClick={() => this.detail(item.id)}>
                                 <img src={item.img} alt="" />
                                 <div>
                                     <p className='name'>{item.goodsname}</p>
