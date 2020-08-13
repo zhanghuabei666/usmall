@@ -5,7 +5,7 @@ import store from '../store/index'
 // 请求拦截
 
 axios.interceptors.request.use(config=>{
-    if (config.url != '/login') {
+    if (config.url !== '/api/login') {
         config.headers.authorization = store.getState().user.token;
     }
     return config
@@ -13,8 +13,8 @@ axios.interceptors.request.use(config=>{
 
 // 响应拦截
 axios.interceptors.response.use(res=>{
-    console.log('请求数据=========');
-    console.log(res);
+    // console.log('请求数据=========');
+    // console.log(res);
     return res
 })
 

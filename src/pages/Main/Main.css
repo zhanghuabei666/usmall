@@ -1,6 +1,7 @@
 .main {
-    width: 100vw;
+    width: 100%;
     position: relative;
+    padding-bottom: 20%;
     overflow: hidden;
 }
 
@@ -79,7 +80,7 @@
 .main .nav .navBar{
     display: flex;
     height: 1.5rem;
-    border-bottom: 0.02rem solid #333333;
+    border-bottom: 0.02rem solid #666;
 }
 .main .nav .navBar .aa{
     text-align: center;

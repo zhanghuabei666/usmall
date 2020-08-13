@@ -15,13 +15,15 @@ export default class Home extends Component {
                         <img src={src} alt="" />
                     </div>
                     <div className="search">
-                        <input type="search"  placeholder="寻找商品" id=""/>
+                        <input type="search" placeholder="寻找商品" />
                     </div>
                 </div>
                 <div className="banner">
                     <Banner></Banner>
                     <Nav></Nav>
-                    <List {...this.props}></List>
+                    <div className="homeL">
+                        <List {...this.props}></List>
+                    </div>
                 </div>
             </div>
         )

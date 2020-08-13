@@ -1,3 +1,9 @@
+.ulList{
+    width: 100%;
+    overflow: hidden !important;
+    background: #fff;
+    padding-bottom: 1.2rem;
+}
 .ulList li{
     display: flex;
     width: 95%;

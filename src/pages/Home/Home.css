@@ -1,6 +1,5 @@
 .home {
-    width: 100vw;
-    overflow: hidden;
+    width: 100%;
 }
 
 .home .logo {
@@ -9,7 +8,7 @@
     top: 0;
     left: 0;
     height: 0.98rem;
-    width: 100vw;
+    width: 100%;
     display: flex;
     z-index: 22;
 }
@@ -25,7 +24,6 @@
     margin: 0.26rem auto;
     font: 0.22rem/0.46rem '微软雅黑';
     width: 1.62rem;
-    /* text-align: left; */
     background: #ccc;
     padding-left: .4rem;
     border-radius: 0.2rem;
@@ -44,6 +42,11 @@
     height: 0.46rem;
     align-items: center;
 }
+
 .home .banner{
-    margin-top: 0.98rem;
+    overflow: hidden;
+}
+.home .homeL{
+    height: 100%;
+    overflow: hidden;
 }

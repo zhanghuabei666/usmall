@@ -20,6 +20,7 @@ class Cart extends Component {
         // 一进页面就发起请求  
         this.props.requestList(this.props.getUser.uid);
     }
+
     // 减少
     sub(item) {
         if (item.num <= 1) {
@@ -48,51 +49,88 @@ class Cart extends Component {
                 })
             },
         ])
+    }
 
+    constructor() {
+        super()
+        this.state = {
+            tag: true,
+            i:null
+        }
+    }
+
+
+    //滑动移出按钮
+    start(e) {
+        this.endX = 0;
+        this.startX = e.touches[0].clientX
+    }
+    move(e) {
+        this.endX = e.touches[0].clientX
+    }
+    end(e,index) {
+        if (this.endX === 0) {
+            return;
+        }
+        if (this.startX + 50 < this.endX) {
+            this.setState({
+                tag: true,
+                i:index
+            })
+            return;
+        }
+        if (this.endX + 50 < this.startX) {
+            this.setState({
+                tag: false,
+                i:index
+            })
+            return;
+        }
     }
     render() {
         const { cartlist, changeIsEditor, isAll, isEditor, changeIsAll, changeOne, getAllPrice, } = this.props;
-
+        const { tag,i } = this.state;
         return (
             <div className='cart'>
                 <h3>购物车</h3>
                 {cartlist.length === 0 ? <div className="resultsP"><ResultsP></ResultsP></div> :
-                    <div>
-                        <div className='lists'>
-                            {
-                                cartlist.map((item, index) => {
-                                    return <table className='tables' key={item.id}>
-                                        <tbody>
-                                            <tr className='tr1'>
-                                                <th className='th1' colSpan="4">
-                                                    <img src={store} alt="" />
-                                                    <em>杭州办税区仓</em>
-                                                </th>
-                                            </tr>
-                                            <tr className='tr2'>
-                                                <th className='th1'>
-                                                    <img src={item.checked ? radio_hig : radio_nor} onClick={() => changeOne(index)} alt="" />
-                                                </th>
-                                                <th className='th2'>
-                                                    <img src={item.img} alt="" />
-                                                </th>
-                                                <th className='th3'>
-                                                    <p className='p1'>{item.goodsname}</p>
-                                                    <p className='p2'>
-                                                        <button onClick={() => this.sub(item)}>-</button>
-                                                        <button>{item.num}</button>
-                                                        <button onClick={() => this.add(item, 2)}>+</button>
-                                                    </p>
-                                                    <em>总价：{filterPrice(item.num * item.price)}</em>
-                                                </th>
-                                                <th className='th4'>{"￥" + filterPrice(item.price)}</th>
-                                                <th className={!isEditor ? 'th5' : 'th55'}><div className="shop-item-del" onClick={() => this.del(item.id)}>删除</div></th>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                })
-                            }
-                        </div>
+                    <div className='cartL'>
+                        {cartlist.map((item, index) => {
+                            return <div className={(!isEditor && (tag ||index!==i)) ? 'lists' : 'lists aa'} onTouchStart={(e) => this.start(e)} onTouchEnd={(e) => this.end(e,index)} onTouchMove={(e) => this.move(e)} key={item.id}>
+                                <table className='tables'>
+                                    <tbody>
+                                        <tr className='tr1'>
+                                            <th className='th1' colSpan="4">
+                                                <img src={store} alt="" />
+                                                <em>杭州办税区仓</em>
+                                            </th>
+                                        </tr>
+                                        <tr className='tr2'>
+                                            <th className='th1'>
+                                                <img src={item.checked ? radio_hig : radio_nor} onClick={() => changeOne(index)} alt="" />
+                                            </th>
+                                            <th className='th2'>
+                                                <img src={item.img} alt="" />
+                                            </th>
+                                            <th className='th3'>
+                                                <p className='p1'>{item.goodsname}</p>
+                                                <p className='p2'>
+                                                    <button onClick={() => this.sub(item)}>-</button>
+                                                    <button>{item.num}</button>
+                                                    <button onClick={() => this.add(item, 2)}>+</button>
+                                                </p>
+                                                <em>总价：{filterPrice(item.num * item.price)}</em>
+                                            </th>
+                                            <th className='th4'>{"￥" + filterPrice(item.price)}</th>
+                                            <th className="th5"><div className="shop-item-del" onClick={() => this.del(item.id)}>删除</div></th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+
+                            </div>
+                        })
+                        }
                         <footer className='footers'>
                             <table className='tables'>
                                 <tbody>

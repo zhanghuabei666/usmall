@@ -63,7 +63,6 @@ class Login extends Component {
 }
 
 const mapState=(state)=>{
-    console.log(state)
     return {
       
     }

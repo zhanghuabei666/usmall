@@ -27,7 +27,7 @@ class Fenlei extends Component {
         return (
             <div className='fenlei'>
                 <h3>分类</h3>
-                <div className="main">
+                <div className="main1">
                     <div className="navL">
                         {
                             cate === undefined ? null : cate.map((item, index) => {

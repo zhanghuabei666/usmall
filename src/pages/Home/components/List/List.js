@@ -8,17 +8,16 @@ import './List.css'
 import { filterPrice } from '../../../../filters/filters'
 
 class List extends Component {
-
     componentDidMount() {
         const result = querystring.parse(this.props.location.search.slice(1));
         // 一进页面就发起请求   
         this.props.requestList(result.id);
     }
-    detail(id){
-        this.props.history.push('/detail?id='+id)
+    detail(id) {
+        this.props.history.push('/detail?id=' + id)
     }
     render() {
-        const {indexgoods} = this.props;
+        const { indexgoods } = this.props;
         // 将数据对象转成对象
         function objOfValueToArr(object) {
             var arr = [];
@@ -31,12 +30,10 @@ class List extends Component {
         }
         let lists = indexgoods === undefined ? null : objOfValueToArr(indexgoods[0]);
         return (
-            <div>
-              
-              <ul className='ulList'>
+            <ul className='ulList'>
                 {
                     lists[0] === undefined ? null : lists[0].map(item => {
-                        return <li key={item.id} onClick={()=>this.detail(item.id)}>
+                        return <li key={item.id} onClick={() => this.detail(item.id)}>
                             <img src={item.img} alt="" />
                             <div>
                                 <p className='name'>{item.goodsname}</p>
@@ -46,9 +43,7 @@ class List extends Component {
                         </li>
                     })
                 }
-
             </ul>
-            </div>
         )
     }
 }

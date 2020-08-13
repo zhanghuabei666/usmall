@@ -9,7 +9,7 @@ import { getbanner, getindexgoods, getcatetree, getgoods, getgoodsinfo, getCartl
 // 初始状态
 const initState = {
     user: sessionStorage.getItem("user") ? JSON.parse(sessionStorage.getItem("user")) : null,//存登录信息
-    banner: [],  //轮播图数据
+    banners: [],  //轮播图数据
     cate: [],   // 获取分类信息(首页)
     indexgoods: [],  // 获取商品信息(首页)
     goods: [],  // 获取分类商品
@@ -36,10 +36,10 @@ const changeBannerAction = arr => {
 export const requestBannerAction = () => {
     return (dispatch, getState) => {
         // 缓存层 ，有数据就不二次请求
-        // const {banners}=getState()
-        // if(banners.length>0){
-        //     return;
-        // }
+        const {banners}=getState()
+        if(banners.length>0){
+            return;
+        }
         // 发请求
         getbanner().then(res => {
             dispatch(changeBannerAction(res.data.list))
@@ -55,10 +55,10 @@ const changeIndexGoodsAction = arr => {
 export const requestIndexGoodsAction = () => {
     return (dispatch, getState) => {
         // 缓存层 ，有数据就不二次请求
-        // const {indexgoods}=getState()
-        // if(indexgoods.length>0){
-        //     return;
-        // }
+        const {indexgoods}=getState()
+        if(indexgoods.length>0){
+            return;
+        }
         // 发请求
         getindexgoods().then(res => {
             dispatch(changeIndexGoodsAction(res.data.list))
@@ -73,10 +73,10 @@ const changeGoodsinfoAction = obj => {
 export const requestGoodsinfoAction = (id) => {
     return (dispatch, getState) => {
         // 缓存层 ，有数据就不二次请求
-        // const {indexgoods}=getState()
-        // if(indexgoods.length>0){
-        //     return;
-        // }
+        const {goodsinfo}=getState()
+        if(goodsinfo.length>0){
+            return;
+        }
         // 发请求
         getgoodsinfo({ id: id }).then(res => {
             dispatch(changeGoodsinfoAction(res.data.list))
@@ -95,10 +95,10 @@ const changeCateAction = arr => {
 export const requestCateAction = () => {
     return (dispatch, getState) => {
         // 缓存层 ，有数据就不二次请求
-        // const {cates}=getState()
-        // if(cates.length>0){
-        //     return;
-        // }
+        const {cate}=getState()
+        if(cate.length>0){
+            return;
+        }
         // 发请求
         getcatetree().then(res => {
             dispatch(changeCateAction(res.data.list))
@@ -113,10 +113,10 @@ const changeGoodsAction = arr => {
 export const requestGoodsAction = (id) => {
     return (dispatch, getState) => {
         // 缓存层 ，有数据就不二次请求
-        // const {cates}=getState()
-        // if(cates.length>0){
-        //     return;
-        // }
+        const {goods}=getState()
+        if(goods.length>0){
+            return;
+        }
         // 发请求
         getgoods({ fid: id }).then(res => {
             console.log(res);
@@ -135,6 +135,11 @@ const changeCartlistAction = list => {
 // 一进页面发起购物车列表请求
 export const requestCartlistAction = (id) => {
     return (dispatch, getState) => {
+         // 缓存层 ，有数据就不二次请求
+         const {cartlist}=getState()
+         if(cartlist.length>0){
+             return;
+         }
         // 发请求
         getCartlist({ uid: id }).then(res => {
             const list = res.data.list ? res.data.list : [];

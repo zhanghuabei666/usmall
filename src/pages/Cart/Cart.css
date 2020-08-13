@@ -1,18 +1,30 @@
 .cart{
-    overflow: hidden;
+    height: 100vh;
 }
 .cart .resultsP{
-    margin: 3rem 0 4rem 0.3rem;
-    box-sizing: border-box;
+    padding-top: 4rem;
+}
+.cart .cartL{
+    padding-top: 1rem;
+    overflow: hidden;
+    padding-bottom: 2.25rem;
+    background: #fff;
 }
 
 .cart .lists {
-    margin: 1rem 0 4rem 0.3rem;
-    box-sizing: border-box;
+    width: 100%;
+    margin-left: 0.3rem;   
+    transition: margin-left 0.4s;
 }
 .cart .tables{
-    width: 100%;
+    width: 8rem; 
+    background: #fff;
     overflow: hidden;
+    
+}
+.cart .aa{
+    margin-left: -0.79rem;  
+    transition: margin-left 0.4s;
 }
 
 .cart .tables .tr1 .th1 {
@@ -28,7 +40,7 @@
 }
 
 .cart .tables .tr2 .th1 {
-    width: 0.6rem;
+    width: .6rem;
     text-align: left;
 }
 
@@ -42,18 +54,19 @@
 
 .cart .tables .tr2 .th2 {
     width: 1.7rem;
+    text-align: left;
 }
 .cart .tables .tr2 .th2 img {
     width: 1.4rem;
     height: 1.4rem;
-    border: 0.01rem solid;
     display: block;
     margin-top: .3rem;
+    margin-right: 0;
 }
 
 .cart .tables .tr2 .th3 {
     text-align: left;
-    width: 2rem;
+    width: 2.2rem;
 }
 
 .cart .tables .tr2 .th3 .p1 {
@@ -78,30 +91,16 @@
 }
 
 .cart .tables .tr2 .th4 {
+    width: 1.85rem;
     font: 0.18rem/1.1rem '微软雅黑';
+    text-align: left;
 }
 
 .cart .tables .tr2 .th5{
-    position: relative;
-    top: 0;
-    right: -1.16rem;
-    width: 1.16rem;
-    background: red;
-    margin-left: .2rem;
+    width: 1rem;
+    background: #ff9900;
     color: #fff;
-    transition: all 1s;
 }
-.cart .tables .tr2 .th55{
-    position: relative;
-    top: 0;
-    right: 0rem;
-    width: 1.16rem;
-    background: red;
-    margin-left: .2rem;
-    color: #fff;
-    transition: all 0.3s;
-}
-
 
 .footers {
     position: fixed;
@@ -109,47 +108,51 @@
     left: 0;
     height: 1rem;
     padding-left: 0.3rem;
+    background: #fff;
+}
+.footers .tables{
+    width: 100%;
 }
 
-.footers .tr .th1 {
-    width: .5rem;
+.footers .tables .tr .th1 {
+    width: .6rem;
     text-align: left;
     padding-right: 0.62rem;
 }
 
-.footers .tr .th1 img {
+.footers .tables .tr .th1 img {
     width: 0.4rem;
     height: 0.4rem;
     display: block;
     text-align: left;
 }
 
-.footers .tr .th1 em,
-.footers .tr .th2 em {
+.footers .tables .tr .th1 em,
+.footers .tables .tr .th2 em {
     display: block;
     color: #666666;
     font: 0.22rem/.42rem '微软雅黑';
 }
 
-.footers .tr .th2 img {
+.footers .tables .tr .th2 img {
     width: 0.4rem;
     height: 0.4rem;
     display: block;
     text-align: left;
 }
 
-.footers .tr .th2 em {
+.footers .tables .tr .th2 em {
     width: 0.64rem;
     text-align: left;
 }
 
-.footers .tr .th3 {
+.footers .tables .tr .th3 {
     width: 2.1rem;
     padding-right: 1.04rem;
     font: 0.22rem/.32rem '微软雅黑';
 }
 
-.footers .tr .th4 button {
+.footers .tables .tr .th4 button {
     width: 2.08rem;
     background: #ffaa00;
     color: #fff;

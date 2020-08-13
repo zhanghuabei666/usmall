@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import { Switch, Route, Redirect} from 'react-router-dom'
+import { Switch,  Redirect} from 'react-router-dom'
 import './Index.css'
 // 引入路由
 import Home from '../../pages/Home/Home'
